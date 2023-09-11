@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="StatsUpgrader-1.0">
+    <output-path>$PROJECT_DIR$/../../Server-1.20.1-spigot/plugins</output-path>
+    <root id="archive" name="StatsUpgrader-1.0.jar">
+      <element id="module-output" name="StatsUpgrader" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src/main/resources" />
+    </root>
+  </artifact>
+</component>
