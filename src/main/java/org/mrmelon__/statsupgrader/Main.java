@@ -6,6 +6,7 @@ import org.mrmelon__.statsupgrader.CMD.StatsCMD;
 import org.mrmelon__.statsupgrader.CMD.adminCMD.AdminCommandsCMD;
 import org.mrmelon__.statsupgrader.CMD.adminCMD.AdminCommandsCompleter;
 import org.mrmelon__.statsupgrader.events.InventoryEvents;
+import org.mrmelon__.statsupgrader.events.PlayedTimeEvent;
 import org.mrmelon__.statsupgrader.events.UserAddEvents;
 
 public final class Main extends JavaPlugin {
@@ -18,6 +19,7 @@ public final class Main extends JavaPlugin {
 
         Bukkit.getPluginManager().registerEvents(new InventoryEvents(), this);
         Bukkit.getPluginManager().registerEvents(new UserAddEvents(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayedTimeEvent(),this);
     }
 
     @Override

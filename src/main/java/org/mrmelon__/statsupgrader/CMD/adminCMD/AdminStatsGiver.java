@@ -1,14 +1,20 @@
 package org.mrmelon__.statsupgrader.CMD.adminCMD;
 
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.mrmelon__.statsupgrader.ColorSay;
 import org.mrmelon__.statsupgrader.admins.Admins;
+import org.mrmelon__.statsupgrader.playerstime.PlayTime;
 import org.mrmelon__.statsupgrader.users.Users;
 import org.mrmelon__.statsupgrader.users.UsersStats;
 
 public class AdminStatsGiver {
 
     public static void getUsersPlayTimeStats(CommandSender commandSender, String name) {
+        Player player = (Player) commandSender;
+        PlayTime.setQuittime(player);
+        PlayTime.setPlayTimeStats(player);
+        PlayTime.setJointime(player);
         if (Admins.adminChecker(commandSender)) { // Чекер на админа
             if (Users.getUsers().contains(name)) {
                 ColorSay.sayToPlayer(commandSender, "PlayTime: "+name+" "+(UsersStats.getUsersPlayTimeStats().get(name)));
@@ -17,6 +23,11 @@ public class AdminStatsGiver {
     }
 
     public static void getUsersPlayTimeStatsAll(CommandSender commandSender) {
+        for (Player player : PlayTime.getJointime().keySet()){
+            PlayTime.setQuittime(player);
+            PlayTime.setPlayTimeStats(player);
+            PlayTime.setJointime(player);
+        }
         if (Admins.adminChecker(commandSender)) { // Чекер на админа
             ColorSay.sayToPlayer(commandSender, "PlayTime: " + (UsersStats.getUsersPlayTimeStats()));
         } else ColorSay.sayToPlayerError(commandSender,"You don't permissions for this action");
