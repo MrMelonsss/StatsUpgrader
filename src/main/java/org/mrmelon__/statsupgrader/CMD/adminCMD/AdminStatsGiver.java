@@ -45,9 +45,17 @@ public class AdminStatsGiver {
         } else ColorSay.sayToPlayerError(commandSender,"You don't permissions for this action");
     }
 
-    public static void getUsersBreakBlockCountStats(CommandSender commandSender) {
+    public static void getUsersBreakBlockCountStats(CommandSender commandSender, String name) {
         if (Admins.adminChecker(commandSender)) { // Чекер на админа
-            ColorSay.sayToPlayer(commandSender,"Admin list: "+(Admins.getAdmins()));
+            if (Users.getUsers().contains(name)) {
+                ColorSay.sayToPlayer(commandSender,"Break block count: "+name+" "+(UsersStats.getUsersBreakBlockCountStats().get(name)));
+            } else ColorSay.sayToPlayerError(commandSender,"This player is not defined");
+        } else ColorSay.sayToPlayerError(commandSender,"You don't permissions for this action");
+    }
+
+    public static void getUsersBreakBlockCountStatsAll(CommandSender commandSender) {
+        if (Admins.adminChecker(commandSender)) { // Чекер на админа
+            ColorSay.sayToPlayer(commandSender,"Break block count: "+(UsersStats.getUsersBreakBlockCountStats()));
         } else ColorSay.sayToPlayerError(commandSender,"You don't permissions for this action");
     }
 

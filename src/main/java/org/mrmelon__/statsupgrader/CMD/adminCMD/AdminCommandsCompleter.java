@@ -19,7 +19,8 @@ public class AdminCommandsCompleter implements TabCompleter {
         }
         if (strings.length==2){ // Лист на аргументы команды при длине 2
             return List.of(
-                    "playtime"
+                    "playtime",
+                    "breakblockcount"
             );
         }
         return null;

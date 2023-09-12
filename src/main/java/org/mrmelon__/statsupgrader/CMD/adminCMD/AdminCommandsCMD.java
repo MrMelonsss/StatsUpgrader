@@ -21,6 +21,13 @@ public class AdminCommandsCMD implements CommandExecutor {
                 } catch (Exception e) {
                     AdminStatsGiver.getUsersPlayTimeStatsAll(commandSender);
                 }
+            } else if (arg2.equals("breakblockcount")) {
+                try {
+                    String arg3 = strings[2];
+                    AdminStatsGiver.getUsersBreakBlockCountStats(commandSender, strings[2]);
+                } catch (Exception e) {
+                    AdminStatsGiver.getUsersBreakBlockCountStatsAll(commandSender);
+                }
             }
         }
         else return false;
