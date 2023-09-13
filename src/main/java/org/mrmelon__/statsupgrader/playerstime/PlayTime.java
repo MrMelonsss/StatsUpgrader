@@ -30,7 +30,7 @@ public class PlayTime {
         int endtime = quittime.get(player);
         int result = endtime-starttime;
         int old = UsersStats.getUsersPlayTimeStatsPerson(player.getName());
-        UsersStats.setUsersPlayTimeStats(player.getName(),old+result);
+        UsersStats.setUsersPlayTimeStatsPerson(player.getName(),old+result);
     }
 
     public static void setJointime(Player player) {

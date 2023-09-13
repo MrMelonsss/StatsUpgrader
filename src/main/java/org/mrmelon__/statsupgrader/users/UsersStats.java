@@ -21,12 +21,20 @@ public class UsersStats {
         usersDeathCountStats.put(nickname,deathCount);
     }
 
-    public static void setUsersPlayTimeStats(String nickname,int playTime){
+    public static void setUsersPlayTimeStatsPerson(String nickname, int playTime){
         usersPlayTimeStats.put(nickname,playTime);
     }
 
     public static int getUsersPlayTimeStatsPerson(String nickname){
         return usersPlayTimeStats.get(nickname);
+    }
+
+    public static void setUsersBreakBlockCountStatsPerson(String nickname, int breakBlockCount){
+        usersBreakBlockCountStats.put(nickname,breakBlockCount);
+    }
+
+    public static int getUsersBreakBlockCountStatsPerson(String nickname){
+        return usersBreakBlockCountStats.get(nickname);
     }
 
     public static Map<String, Integer> getUsersPlayTimeStats() {

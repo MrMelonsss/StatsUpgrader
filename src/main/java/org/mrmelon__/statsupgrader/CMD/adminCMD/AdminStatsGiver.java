@@ -1,5 +1,7 @@
 package org.mrmelon__.statsupgrader.CMD.adminCMD;
 
+import org.bukkit.Material;
+import org.bukkit.Statistic;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.mrmelon__.statsupgrader.ColorSay;
@@ -11,19 +13,20 @@ import org.mrmelon__.statsupgrader.users.UsersStats;
 public class AdminStatsGiver {
 
     public static void getUsersPlayTimeStats(CommandSender commandSender, String name) {
+        // Обновляем статистику сыгранного времени у юзера
         Player player = (Player) commandSender;
         PlayTime.setQuittime(player);
         PlayTime.setPlayTimeStats(player);
         PlayTime.setJointime(player);
         if (Admins.adminChecker(commandSender)) { // Чекер на админа
-            if (Users.getUsers().contains(name)) {
+            if (Users.getUsers().contains(name)) { // Чекер на юзера
                 ColorSay.sayToPlayer(commandSender, "PlayTime: "+name+" "+(UsersStats.getUsersPlayTimeStats().get(name)));
             } else ColorSay.sayToPlayerError(commandSender,"This player is not defined");
         } else ColorSay.sayToPlayerError(commandSender,"You don't permissions for this action");
     }
 
     public static void getUsersPlayTimeStatsAll(CommandSender commandSender) {
-        for (Player player : PlayTime.getJointime().keySet()){
+        for (Player player : PlayTime.getJointime().keySet()){ // Обновляем статистику сыгранного времени у всех юзеров, которые онлайн
             PlayTime.setQuittime(player);
             PlayTime.setPlayTimeStats(player);
             PlayTime.setJointime(player);
@@ -46,6 +49,8 @@ public class AdminStatsGiver {
     }
 
     public static void getUsersBreakBlockCountStats(CommandSender commandSender, String name) {
+        Player player = (Player) commandSender;
+        UsersStats.setUsersBreakBlockCountStatsPerson(player.getName(),player.getStatistic(Statistic.MINE_BLOCK, Material.GRASS_BLOCK));
         if (Admins.adminChecker(commandSender)) { // Чекер на админа
             if (Users.getUsers().contains(name)) {
                 ColorSay.sayToPlayer(commandSender,"Break block count: "+name+" "+(UsersStats.getUsersBreakBlockCountStats().get(name)));
@@ -54,6 +59,9 @@ public class AdminStatsGiver {
     }
 
     public static void getUsersBreakBlockCountStatsAll(CommandSender commandSender) {
+        for (Player player : PlayTime.getJointime().keySet()){ // Обновляем статистику сыгранного времени у всех юзеров, которые онлайн
+            UsersStats.setUsersBreakBlockCountStatsPerson(player.getName(),player.getStatistic(Statistic.MINE_BLOCK, Material.GRASS_BLOCK));
+        }
         if (Admins.adminChecker(commandSender)) { // Чекер на админа
             ColorSay.sayToPlayer(commandSender,"Break block count: "+(UsersStats.getUsersBreakBlockCountStats()));
         } else ColorSay.sayToPlayerError(commandSender,"You don't permissions for this action");
