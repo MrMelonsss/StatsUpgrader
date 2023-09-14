@@ -36,6 +36,27 @@ public class AdminCommandsCMD implements CommandExecutor {
                 } catch (Exception e) {
                     AdminStatsGiver.getUsersBreakBlockCountStatsAll(commandSender);
                 }
+            } else if (strings[1].equals("lastseen")) {
+                try {
+                    String arg3 = strings[2];
+                    AdminStatsGiver.getUsersLastSeenStats(commandSender,strings[2]);
+                } catch (Exception e) {
+                    AdminStatsGiver.getUsersLastSeenStatsAll(commandSender);
+                }
+            } else if (strings[1].equals("killmobcount")) {
+                try {
+                    String arg3 = strings[2];
+                    AdminStatsGiver.getUsersKillMobCountStats(commandSender,strings[2]);
+                } catch (Exception e) {
+                    AdminStatsGiver.getUsersKillMobCountStatsAll(commandSender);
+                }
+            } else if (strings[1].equals("deathcount")) {
+                try {
+                    String arg3 = strings[2];
+                    AdminStatsGiver.getUsersDeathCountStats(commandSender,strings[2]);
+                } catch (Exception e) {
+                    AdminStatsGiver.getUsersDeathCountStatsAll(commandSender);
+                }
             }
         }
         else return false;

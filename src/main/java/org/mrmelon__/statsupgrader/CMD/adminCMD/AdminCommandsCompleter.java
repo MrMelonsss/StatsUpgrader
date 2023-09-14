@@ -20,7 +20,10 @@ public class AdminCommandsCompleter implements TabCompleter {
         if (strings.length==2 && strings[0].equals("userstats")){ // Лист на аргументы команды при длине 2
             return List.of(
                     "playtime",
-                    "breakblockcount"
+                    "breakblockcount",
+                    "lastseen",
+                    "killmobcount",
+                    "deathcount"
             );
         }
         return null;

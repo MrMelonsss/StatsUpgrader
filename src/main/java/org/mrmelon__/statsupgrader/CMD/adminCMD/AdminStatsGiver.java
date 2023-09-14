@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.mrmelon__.statsupgrader.ColorSay;
 import org.mrmelon__.statsupgrader.admins.Admins;
+import org.mrmelon__.statsupgrader.lastseen.LastSeen;
 import org.mrmelon__.statsupgrader.playerstime.PlayTime;
 import org.mrmelon__.statsupgrader.users.Users;
 import org.mrmelon__.statsupgrader.users.UsersStats;
@@ -36,15 +37,34 @@ public class AdminStatsGiver {
         } else ColorSay.sayToPlayerError(commandSender,"You don't permissions for this action");
     }
 
-    public static void getUsersLastSeenStats(CommandSender commandSender) {
+    public static void getUsersLastSeenStats(CommandSender commandSender, String name) {
         if (Admins.adminChecker(commandSender)) { // Чекер на админа
-            ColorSay.sayToPlayer(commandSender,"Admin list: "+(Admins.getAdmins()));
+            ColorSay.sayToPlayer(commandSender,"LastSeen: "+(UsersStats.getUsersLastSeenStats().get(name)));
+        } else ColorSay.sayToPlayerError(commandSender,"You don't permissions for this action");
+    }
+    public static void getUsersLastSeenStatsAll(CommandSender commandSender) {
+        for (Player player : PlayTime.getJointime().keySet()){ // Обновляем статистику онлайна у всех юзеров, которые онлайн
+            LastSeen.checkLastSeenOrOnline(player);
+        }
+        if (Admins.adminChecker(commandSender)) { // Чекер на админа
+            ColorSay.sayToPlayer(commandSender, "LastSeen: " + (UsersStats.getUsersLastSeenStats()));
         } else ColorSay.sayToPlayerError(commandSender,"You don't permissions for this action");
     }
 
-    public static void getUsersKillMobCountStats(CommandSender commandSender) {
+    public static void getUsersKillMobCountStats(CommandSender commandSender,String name) {
+        Player player = (Player) commandSender;
+        UsersStats.setUsersKillMobCountStatsPerson(player.getName(),player.getStatistic(Statistic.MOB_KILLS));
         if (Admins.adminChecker(commandSender)) { // Чекер на админа
-            ColorSay.sayToPlayer(commandSender,"Admin list: "+(Admins.getAdmins()));
+            ColorSay.sayToPlayer(commandSender,"KillMobCount: "+(UsersStats.getUsersKillMobCountStats().get(name)));
+        } else ColorSay.sayToPlayerError(commandSender,"You don't permissions for this action");
+    }
+
+    public static void getUsersKillMobCountStatsAll(CommandSender commandSender) {
+        for (Player player : PlayTime.getJointime().keySet()){ // Обновляем статистику сыгранного времени у всех юзеров, которые онлайн
+            UsersStats.setUsersKillMobCountStatsPerson(player.getName(),player.getStatistic(Statistic.MOB_KILLS));
+        }
+        if (Admins.adminChecker(commandSender)) { // Чекер на админа
+            ColorSay.sayToPlayer(commandSender,"KillMobCount: "+(UsersStats.getUsersKillMobCountStats()));
         } else ColorSay.sayToPlayerError(commandSender,"You don't permissions for this action");
     }
 
@@ -67,9 +87,22 @@ public class AdminStatsGiver {
         } else ColorSay.sayToPlayerError(commandSender,"You don't permissions for this action");
     }
 
-    public static void getUsersDeathCountStats(CommandSender commandSender) {
+    public static void getUsersDeathCountStats(CommandSender commandSender,String name) {
+        Player player = (Player) commandSender;
+        UsersStats.setUsersDeathCountStatsPerson(player.getName(),player.getStatistic(Statistic.DEATHS));
         if (Admins.adminChecker(commandSender)) { // Чекер на админа
-            ColorSay.sayToPlayer(commandSender,"Admin list: "+(Admins.getAdmins()));
+            if (Users.getUsers().contains(name)) {
+                ColorSay.sayToPlayer(commandSender,"Death count: "+name+" "+(UsersStats.getUsersDeathCountStats().get(name)));
+            } else ColorSay.sayToPlayerError(commandSender,"This player is not defined");
+        } else ColorSay.sayToPlayerError(commandSender,"You don't permissions for this action");
+    }
+
+    public static void getUsersDeathCountStatsAll(CommandSender commandSender){
+        for (Player player : PlayTime.getJointime().keySet()){ // Обновляем статистику сыгранного времени у всех юзеров, которые онлайн
+            UsersStats.setUsersDeathCountStatsPerson(player.getName(),player.getStatistic(Statistic.DEATHS));
+        }
+        if (Admins.adminChecker(commandSender)) { // Чекер на админа
+            ColorSay.sayToPlayer(commandSender,"Death count: "+(UsersStats.getUsersDeathCountStats()));
         } else ColorSay.sayToPlayerError(commandSender,"You don't permissions for this action");
     }
 

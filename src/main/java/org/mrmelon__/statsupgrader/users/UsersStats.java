@@ -33,10 +33,6 @@ public class UsersStats {
         usersBreakBlockCountStats.put(nickname,breakBlockCount);
     }
 
-    public static int getUsersBreakBlockCountStatsPerson(String nickname){
-        return usersBreakBlockCountStats.get(nickname);
-    }
-
     public static Map<String, Integer> getUsersPlayTimeStats() {
         return usersPlayTimeStats;
     }
@@ -44,7 +40,16 @@ public class UsersStats {
     public static Map<String, String> getUsersLastSeenStats() {
         return usersLastSeenStats;
     }
+    public static void setUsersLastSeenStatsPerson(String nickname, String date){
+        usersLastSeenStats.put(nickname,date);
+    }
 
+    public static void setUsersKillMobCountStatsPerson(String nickname, int killMobCount){
+        usersKillMobCountStats.put(nickname,killMobCount);
+    }
+    public static void setUsersDeathCountStatsPerson(String nickname, int deathCount){
+        usersDeathCountStats.put(nickname,deathCount);
+    }
     public static Map<String, Integer> getUsersKillMobCountStats() {
         return usersKillMobCountStats;
     }
