@@ -5,10 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.mrmelon__.statsupgrader.CMD.StatsCMD;
 import org.mrmelon__.statsupgrader.CMD.adminCMD.AdminCommandsCMD;
 import org.mrmelon__.statsupgrader.CMD.adminCMD.AdminCommandsCompleter;
-import org.mrmelon__.statsupgrader.events.InventoryEvents;
-import org.mrmelon__.statsupgrader.events.LastSeenEvent;
-import org.mrmelon__.statsupgrader.events.PlayedTimeEvent;
-import org.mrmelon__.statsupgrader.events.UserAddEvents;
+import org.mrmelon__.statsupgrader.events.*;
 
 public final class Main extends JavaPlugin {
 
@@ -22,6 +19,7 @@ public final class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new UserAddEvents(), this);
         Bukkit.getPluginManager().registerEvents(new PlayedTimeEvent(),this);
         Bukkit.getPluginManager().registerEvents(new LastSeenEvent(),this);
+        Bukkit.getPluginManager().registerEvents(new EffectGiverEvent(), this);
     }
 
     @Override

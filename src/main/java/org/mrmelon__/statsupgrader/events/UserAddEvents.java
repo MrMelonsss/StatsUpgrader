@@ -26,6 +26,5 @@ public class UserAddEvents implements Listener {
         }
     }
 
-    // Доделать Event Quit для того, чтобы вычислять нормальное время игры у Player'а
 
 }
