@@ -18,12 +18,14 @@ public class InventoryEvents implements Listener {
             titleOfUI = event.getView().getTitle().substring(0,9);
         } catch (Exception ignored) {}
         if (titleOfUI.equals("Stats of ")) {
+            event.setCancelled(true);
             ItemStack itemStack = event.getCurrentItem();
-            int meta = itemStack.getItemMeta().getPersistentDataContainer().get(NamespacedKey.fromString("key"), PersistentDataType.INTEGER);
-            switch (meta) {
-                case 1:
-                    break;
-            }
+            String meta = itemStack.getItemMeta().getPersistentDataContainer().get(NamespacedKey.fromString("key"), PersistentDataType.STRING);
+            if (meta.equals("quit")) player.closeInventory();
+            //switch (meta) {
+            //    case 1:
+            //        break;
+            //}
         }
     }
 

@@ -9,8 +9,15 @@ import org.mrmelon__.statsupgrader.events.*;
 
 public final class Main extends JavaPlugin {
 
+    private static Main plugin;
+
+    public static Main getInstaces(){
+        return plugin;
+    }
+
     @Override
     public void onEnable() {
+        plugin = this;
         getCommand("stats").setExecutor(new StatsCMD());
         getCommand("adminsu").setExecutor(new AdminCommandsCMD());
         getCommand("adminsu").setTabCompleter(new AdminCommandsCompleter());

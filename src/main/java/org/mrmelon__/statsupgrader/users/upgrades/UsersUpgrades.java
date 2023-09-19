@@ -26,6 +26,22 @@ public class UsersUpgrades {
         setSpeedDigingFromStats(player);
     }
 
+    public static int getStrengthLevel(String player){
+        return strength.get(player);
+    }
+
+    public static int getSpeedDigingLevel(String player){
+        return speedDiging.get(player);
+    }
+
+    public static int getSpeedLevel(String player){
+        return speed.get(player);
+    }
+
+    public static int getSlowlessLevel(String player){
+        return slowless.get(player);
+    }
+
     public static void setStrengthFromStats(Player player) {
         UsersStats.setUsersKillMobCountStatsPerson(player.getName(),player.getStatistic(Statistic.MOB_KILLS));
         int lvl = 0;
@@ -39,22 +55,17 @@ public class UsersUpgrades {
     }
 
     public static void setSpeedFromStats(Player player) {
-        System.out.println("enableSpeedMethod");
         PlayTime.setQuittime(player);
         PlayTime.setPlayTimeStats(player);
         PlayTime.setJointime(player);
-        System.out.println("reloadSpeedMethod");
         int lvl = 0;
         int lvlRaw = UsersStats.getUsersPlayTimeStats().get(player.getName());
-        System.out.println("returnRawSpeedMethod");
         if (lvlRaw>=100) lvl=1;
         if (lvlRaw>=500) lvl=2;
         if (lvlRaw>=1000) lvl=3;
         if (lvlRaw>=2000) lvl=4;
         if (lvlRaw>=3000) lvl=5;
-        System.out.println("returnSpeedMethod");
         speed.put(player.getName(),lvl);
-        System.out.println("CallSpeedMethod");
     }
 
     public static void setSpeedDigingFromStats(Player player) {
