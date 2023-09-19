@@ -19,40 +19,51 @@ public class InventoryUserUI { // Реализация UI интерфейса �
     public static void openInventoryUserUI(String nickname, CommandSender commandSender){
         Inventory inventory = Bukkit.createInventory(null,27,"Stats of "+nickname); // Создаем инвентарь
 
-        inventory.setItem(1,newItemStack(Material.CREEPER_HEAD,"strength",List.of("Strength Level:"),nickname));
-        inventory.setItem(3,newItemStack(Material.GOLDEN_PICKAXE,"speedDiging",List.of("SpeedDiging Level:"),nickname));
-        inventory.setItem(5,newItemStack(Material.LEATHER_BOOTS,"speed",List.of("Speed Level:"),nickname));
-        inventory.setItem(7,newItemStack(Material.SKELETON_SKULL,"slowless",List.of("Slowless Level:"),nickname));
-        inventory.setItem(9,newItemStackQuit(Material.DARK_OAK_DOOR));
+        inventory.setItem(0,newItemStack(Material.CREEPER_HEAD,"strength",nickname));
+        inventory.setItem(2,newItemStack(Material.GOLDEN_PICKAXE,"speedDiging",nickname));
+        inventory.setItem(4,newItemStack(Material.LEATHER_BOOTS,"speed",nickname));
+        inventory.setItem(6,newItemStack(Material.SKELETON_SKULL,"slowless",nickname));
+        inventory.setItem(8,newItemStack(Material.DIAMOND,"lastseen",nickname));
+        inventory.setItem(22,newItemStackQuit(Material.DARK_OAK_DOOR));
 
         Player player = (Player) commandSender;
         player.openInventory(inventory); // Открываем инвентарь
     }
 
-    public static ItemStack newItemStack(Material material,String meta,List<String> list,String nickname){
+    public static ItemStack newItemStack(Material material,String meta,String nickname){
         ItemStack itemStack = new ItemStack(material);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.getPersistentDataContainer().set(NamespacedKey.fromString("key"),PersistentDataType.STRING,meta);
         switch (meta) {
             case "strength":
                 itemMeta.setDisplayName("Mob's killed: " + UsersStats.getUsersKillMobCountStats().get(nickname));
-                list.set(0, list.get(0) + UsersUpgrades.getStrengthLevel(nickname));
-                itemMeta.setLore(list);
+                itemMeta.setLore(List.of(
+                        "Strength Level: "+UsersUpgrades.getStrengthLevel(nickname)
+                ));
                 break;
             case "speedDiging":
-                itemMeta.setDisplayName("Block's digging: " + UsersStats.getUsersKillMobCountStats().get(nickname));
-                list.set(0, list.get(0) + UsersUpgrades.getSpeedDigingLevel(nickname));
-                itemMeta.setLore(list);
+                itemMeta.setDisplayName("Block's digging: " + UsersStats.getUsersBreakBlockCountStats().get(nickname));
+                itemMeta.setLore(List.of(
+                        "SpeedDiging Level: "+UsersUpgrades.getSpeedDigingLevel(nickname)
+                ));
                 break;
             case "speed":
                 itemMeta.setDisplayName("Play time: " + UsersStats.getUsersPlayTimeStats().get(nickname));
-                list.set(0, list.get(0) + UsersUpgrades.getSpeedLevel(nickname));
-                itemMeta.setLore(list);
+                itemMeta.setLore(List.of(
+                        "Speed Level: "+UsersUpgrades.getSpeedLevel(nickname)
+                ));
                 break;
             case "slowless":
                 itemMeta.setDisplayName("Death count: " + UsersStats.getUsersDeathCountStats().get(nickname));
-                list.set(0, list.get(0) + UsersUpgrades.getSlowlessLevel(nickname));
-                itemMeta.setLore(list);
+                itemMeta.setLore(List.of(
+                        "Slowless Level: "+UsersUpgrades.getSlowlessLevel(nickname)
+                ));
+                break;
+            case "lastseen":
+                itemMeta.setDisplayName("Player is " + (UsersStats.getUsersLastSeenStats().get(nickname).equals("now online") ? "online":"offline"));
+                itemMeta.setLore(List.of(
+                        "Last Seen: "+UsersStats.getUsersLastSeenStats()
+                ));
                 break;
         }
         itemStack.setItemMeta(itemMeta);
