@@ -62,7 +62,7 @@ public class InventoryUserUI { // Реализация UI интерфейса �
             case "lastseen":
                 itemMeta.setDisplayName("Player is " + (UsersStats.getUsersLastSeenStats().get(nickname).equals("now online") ? "online":"offline"));
                 itemMeta.setLore(List.of(
-                        "Last Seen: "+UsersStats.getUsersLastSeenStats()
+                        "Last Seen: "+UsersStats.getUsersLastSeenStats().get(nickname)
                 ));
                 break;
         }
